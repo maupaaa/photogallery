@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels ="clr-namespace:photogallery.Viewmodels"
+             x:Class="photogallery.MainPage">
+    <ContentPage.BindingContext>
+        <viewmodels:GalleryViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid
+     RowDefinitions="Auto, auto, auto, auto, auto ,auto, *, auto">
+
+        <Label
+        Grid.Row="0"
+        Text="{Binding CurrentPicture.Title}"
+        HorizontalTextAlignment="Center"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="#502BD4"
+        Padding="10">
+
+        </Label>
+        <Image
+        Grid.Row="1"
+        Source="{Binding CurrentPicture.Path}"
+        HeightRequest="250"
+        HorizontalOptions="Fill"
+        Aspect="Fill">
+        </Image>
+
+        <Label
+         Grid.Row="2"
+         Text="{Binding CurrentPicture.Likes, StringFormat='Liczba polubień: {0}'}"
+         Padding="5"
+         BackgroundColor="{StaticResource Tertiary}"
+         TextColor="White">
+        </Label>
+        <Grid
+        Grid.Row="4"
+        ColumnDefinitions="*, *, *"
+        Background="#502BD4"
+      >
+
+            <Button 
+                Grid.Column="0"
+                Text="Polub"
+                Command="{Binding LikeCommand}">
+
+            </Button>
+
+            <Button 
+                Grid.Column="1"
+                Text="Usuń"
+                Command="{Binding UnlikeCommand}">
+            </Button>
+
+            <Button 
+                Grid.Column="2"
+                Text="Lokalizacja"
+                Command="{Binding ShowLocationCommand}">
+            </Button>
+
+        </Grid>
+        <Label
+         Grid.Row="5"
+            Text="Opis"
+            FontSize="20"
+            Margin="5"></Label>
+        <Label
+         Grid.Row="6"
+        Text="{Binding CurrentPicture.Description}"
+            Margin="5"></Label>
+
+        <Grid
+            Grid.Row="7"
+            ColumnDefinitions="auto, auto, auto"
+           HorizontalOptions="Center"
+            Margin="5"
+            ColumnSpacing="10"
+             >
+            <Button
+                Text="Poprzednie"
+                Command="{Binding PreviousCommand}"></Button>
+            <Button
+                Grid.Column="2"
+                Text="Następne"
+                Command="{Binding NextCommand}"></Button>
+        </Grid>
+    </Grid>
+</ContentPage>
